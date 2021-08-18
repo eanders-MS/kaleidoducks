@@ -4,6 +4,7 @@ class Duck {
 
     constructor(s: affine.Scene, a: number, d: number, private sign: number) {
         this.root = new affine.Transform();
+        this.root.parent = s.xfrm;
         this.sprite = new affine.ImageSprite(s, "duck");
         this.sprite.xfrm.parent = this.root;
         this.root.localRot = a;
@@ -29,10 +30,10 @@ class DuckScene extends affine.Scene {
         super();
         this.ducks = [];
         const duckn = 6;
-        let sign = 1;
-        let angle = 0;
         const dangle = 360 / duckn;
         const dist = 30;
+        let sign = 1;
+        let angle = 0;
         for (let i = 0; i < duckn; ++i, angle += dangle) {
             const duck = new Duck(this, angle, dist, sign);
             sign *= -1;
