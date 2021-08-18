@@ -10,9 +10,11 @@ class Duck {
         this.sprite.xfrm.localPos.x = Fx8(d);
     }
 
-    update() {
-        this.root.localRot += 2;
-        this.sprite.xfrm.localRot += 4 * this.sign;
+    update(dt: number) {
+        this.root.localRot += 1.5;
+        this.sprite.xfrm.localRot += 3.5 * this.sign;
+        const s = Fx.add(Fx8(1), Fx.mul(Fx8(0.25), affine.trig.sin(this.sign * control.millis() / 10)));
+        this.root.localScl.set(s, s);
     }
 
     draw() {
@@ -26,7 +28,7 @@ class DuckScene extends affine.Scene {
     constructor() {
         super();
         this.ducks = [];
-        const duckn = 5;
+        const duckn = 6;
         let sign = 1;
         let angle = 0;
         const dangle = 360 / duckn;
@@ -39,7 +41,7 @@ class DuckScene extends affine.Scene {
     }
 
     update(dt: number) {
-        this.ducks.forEach(duck => duck.update());
+        this.ducks.forEach(duck => duck.update(dt));
     }
 
     draw() {
