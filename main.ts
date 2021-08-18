@@ -25,16 +25,34 @@ class Duck {
 
 class DuckScene extends affine.Scene {
     ducks: Duck[];
+    duckn: number;
 
     constructor() {
         super();
+        this.duckn = 6;
+    }
+
+    startup() {
+        this.createDucks();
+        controller.setRepeatDefault(0, 0);
+        controller.up.onEvent(ControllerButtonEvent.Pressed, () => {
+            this.duckn += 2;
+            this.createDucks();
+        });
+        controller.down.onEvent(ControllerButtonEvent.Pressed, () => {
+            this.duckn -= 2;
+            this.duckn = Math.max(this.duckn, 0);
+            this.createDucks();
+        });
+    }
+
+    createDucks() {
         this.ducks = [];
-        const duckn = 6;
-        const dangle = 360 / duckn;
+        const dangle = 360 / this.duckn;
         const dist = 30;
         let sign = 1;
         let angle = 0;
-        for (let i = 0; i < duckn; ++i, angle += dangle) {
+        for (let i = 0; i < this.duckn; ++i, angle += dangle) {
             const duck = new Duck(this, angle, dist, sign);
             sign *= -1;
             this.ducks.push(duck);
