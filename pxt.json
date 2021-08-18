@@ -1,0 +1,27 @@
+{
+    "name": "kaleidoducks",
+    "description": "",
+    "dependencies": {
+        "device": "*",
+        "affine": "github:eanders-ms/affine#1541b7a0cba845aed97b2d76349d628628ba364c"
+    },
+    "files": [
+        "main.blocks",
+        "main.ts",
+        "README.md",
+        "assets.json",
+        "images.g.jres",
+        "images.g.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "targetVersions": {
+        "target": "1.5.46",
+        "targetId": "arcade"
+    },
+    "supportedTargets": [
+        "arcade"
+    ],
+    "preferredEditor": "tsprj"
+}
