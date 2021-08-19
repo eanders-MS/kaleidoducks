@@ -5,7 +5,7 @@ class Duck {
     constructor(s: affine.Scene, a: number, d: number, private sign: number) {
         this.root = new affine.Transform();
         this.root.parent = s.xfrm;
-        this.sprite = new affine.ImageSprite(s, "duck");
+        this.sprite = new affine.ImageSprite(s, helpers.getImageByName("duck"));
         this.sprite.xfrm.parent = this.root;
         this.root.localRot = a;
         this.sprite.xfrm.localPos.x = Fx8(d);
