@@ -1,3 +1,5 @@
+let circleSpeed = 1.5;
+
 class Duck {
     root: affine.Transform;
     sprite: affine.ImageSprite;
@@ -12,9 +14,9 @@ class Duck {
     }
 
     update(dt: number) {
-        this.root.localRot += 1.5;
+        this.root.localRot += circleSpeed;
         this.sprite.xfrm.localRot += 3.5 * this.sign;
-        const s = Fx.add(Fx8(1), Fx.mul(Fx8(0.25), affine.trig.sin(this.sign * control.millis() / 10)));
+        const s = Fx.add(Fx8(1), Fx.mul(Fx8(0.5), affine.trig.sin(this.sign * control.millis() / 10)));
         this.root.localScl.set(s, s);
     }
 
@@ -34,7 +36,7 @@ class DuckScene extends affine.Scene {
 
     startup() {
         this.createDucks();
-        controller.setRepeatDefault(0, 0);
+        controller.setRepeatDefault(1, 1);
         controller.up.onEvent(ControllerButtonEvent.Pressed, () => {
             this.duckn += 2;
             this.createDucks();
@@ -43,6 +45,12 @@ class DuckScene extends affine.Scene {
             this.duckn -= 2;
             this.duckn = Math.max(this.duckn, 0);
             this.createDucks();
+        });
+        controller.left.onEvent(ControllerButtonEvent.Pressed, () => {
+            circleSpeed -= 1;
+        });
+        controller.right.onEvent(ControllerButtonEvent.Pressed, () => {
+            circleSpeed += 1;
         });
     }
 
