@@ -52,6 +52,14 @@ class DuckScene extends affine.Scene {
         controller.right.onEvent(ControllerButtonEvent.Pressed, () => {
             circleSpeed += 1;
         });
+        controller.A.onEvent(ControllerButtonEvent.Pressed, () => {
+            const scale = Fx.add(this.xfrm.localScl.x, Fx8(0.25));
+            this.xfrm.localScl = new affine.Vec2(scale, scale);
+        });
+        controller.B.onEvent(ControllerButtonEvent.Pressed, () => {
+            const scale = Fx.max(Fx8(0.25), Fx.sub(this.xfrm.localScl.x, Fx8(0.25)));
+            this.xfrm.localScl = new affine.Vec2(scale, scale);
+        });
     }
 
     createDucks() {
